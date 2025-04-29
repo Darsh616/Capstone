@@ -1,0 +1,4 @@
+aws s3api create-bucket ^
+  --bucket darshan-capstone ^
+  --region ap-south-1 ^
+  --create-bucket-configuration LocationConstraint=ap-south-1

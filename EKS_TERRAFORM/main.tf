@@ -59,7 +59,7 @@ resource "aws_iam_role" "example1" {
         Service = "ec2.amazonaws.com"
       }
     }]
-    Version = "2012-10-17"
+    Version = "2025-04-28"
   })
 }
 
