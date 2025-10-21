@@ -29,21 +29,21 @@ Before proceeding, ensure you have:
 
 Run the following command to back up the existing `aws-auth` ConfigMap:
 
-```bash
+```cmd
 kubectl get configmap -n kube-system aws-auth -o yaml > aws-auth-backup.yaml
+```
 2. Edit the ConfigMap
 Open the ConfigMap in your default editor:
 
-bash
-Copy
-Edit
+
+```cmd
 kubectl edit -n kube-system configmap/aws-auth
+```
+
 3. Update the mapRoles Section
 Modify or add entries in the mapRoles section. Replace <account-id> and role names with your actual IAM role ARNs:
 
-yaml
-Copy
-Edit
+```cmd
 mapRoles: |
   - groups:
     - system:bootstrappers
@@ -54,16 +54,22 @@ mapRoles: |
     - system:masters
     rolearn: arn:aws:iam::<account-id>:role/IAM-Role-K8s
     username: IAM-Role-K8s
+```
 4. Save and Exit
 Save the file and exit your editor. This will apply the changes to the cluster.
 
 5. Verify the Update
 To confirm the changes were successfully applied:
 
-bash
-Copy
-Edit
+```cmd
 kubectl get configmap -n kube-system aws-auth -o yaml
+```
+To restore the previous configuration:
+
+```cmd
+kubectl apply -f aws-auth-backup.yaml
+```
+
 📝 Notes
 system:masters: Grants full administrative access.
 
@@ -80,9 +86,5 @@ Verify IAM role permissions.
 
 Ensure ConfigMap syntax is correct.
 
-To restore the previous configuration:
 
-bash
-Copy
-Edit
-kubectl apply -f aws-auth-backup.yaml
+
